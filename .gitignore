@@ -46,3 +46,8 @@ next-env.d.ts
 .eslintcache
 .turbo
 .swc
+
+# Cloudflare / OpenNext
+/.open-next/
+/.wrangler/
+.dev.vars*

@@ -38,3 +38,9 @@ npm install
 npm run dev
 ```
 Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Deploy to Cloudflare Workers
+The repo is set up with the [OpenNext Cloudflare adapter](https://opennext.js.org/cloudflare) (`wrangler.jsonc`, `open-next.config.ts`).
+- Worker name is `shopcart-poc` in `wrangler.jsonc`. It must match the Worker name in the Cloudflare dashboard, including the `WORKER_SELF_REFERENCE` service binding.
+- Cloudflare build settings: build command `npx opennextjs-cloudflare build`, deploy command `npx opennextjs-cloudflare deploy`.
+- From your machine: `npm run preview` (local Worker) or `npm run deploy`.
