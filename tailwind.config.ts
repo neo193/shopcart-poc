@@ -5,6 +5,9 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    // Data files hold class names too (e.g. category gradients).
+    "./src/data/**/*.{js,ts}",
+    "./src/lib/**/*.{js,ts}",
   ],
   theme: {
     extend: {
