@@ -2,15 +2,20 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Heart, Star } from "lucide-react";
+import { Heart } from "lucide-react";
+import { Stars } from "./Stars";
+import { compareAtPrice, isNew } from "@/lib/catalog";
 import { Product } from "@/data/products";
 import { useStore } from "@/context/StoreContext";
 import { ProductVisual } from "./ProductVisual";
+import { formatPrice } from "@/lib/pricing";
 
 export function ProductCard({ product }: { product: Product }) {
   const { addToCart, wishlist, toggleWishlist } = useStore();
   const [justAdded, setJustAdded] = useState(false);
   const isWished = wishlist.includes(product.id);
+  const wasPrice = compareAtPrice(product);
+  const badge = wasPrice ? product.offer : isNew(product) ? "New" : null;
 
   const handleAdd = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -44,9 +49,19 @@ export function ProductCard({ product }: { product: Product }) {
           />
         </button>
 
+        {badge && (
+          <span
+            className={`absolute left-3.5 top-3.5 z-10 rounded-full px-2.5 py-1 text-[11px] font-bold ${
+              wasPrice ? "bg-brand-orange text-white" : "bg-brand-green text-white"
+            }`}
+          >
+            {badge}
+          </span>
+        )}
         <div className="transition-transform duration-300 group-hover:scale-105">
           <ProductVisual
             type={product.visualType}
+            emoji={product.emoji}
             color={product.defaultColor}
             secondaryColor={product.colors[0]?.secondaryHex}
             className="h-44 w-44"
@@ -64,9 +79,15 @@ export function ProductCard({ product }: { product: Product }) {
             >
               {product.name}
             </Link>
-            <span className="text-base font-bold text-gray-900 shrink-0">
-              ${product.price.toFixed(0)}
-              <sup className="text-[11px] font-semibold">.00</sup>
+            <span className="flex shrink-0 flex-col items-end leading-tight">
+              <span className="text-base font-bold text-gray-900">
+                {formatPrice(product.price)}
+              </span>
+              {wasPrice && (
+                <span className="text-[11px] text-gray-400 line-through">
+                  {formatPrice(wasPrice)}
+                </span>
+              )}
             </span>
           </div>
 
@@ -74,16 +95,8 @@ export function ProductCard({ product }: { product: Product }) {
             {product.shortDesc}
           </p>
 
-          <div className="mt-2 flex items-center gap-1">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star
-                key={i}
-                className="h-3.5 w-3.5 fill-brand-star text-brand-star"
-              />
-            ))}
-            <span className="ml-1 text-xs text-gray-600">
-              ({product.reviews})
-            </span>
+          <div className="mt-2">
+            <Stars rating={product.rating} reviews={product.reviews} />
           </div>
         </div>
 

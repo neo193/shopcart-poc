@@ -6,6 +6,8 @@ interface ProductVisualProps {
   color?: string;
   secondaryColor?: string;
   className?: string;
+  /** Required when type is "emoji". */
+  emoji?: string;
 }
 
 export function ProductVisual({
@@ -13,7 +15,31 @@ export function ProductVisual({
   color = "#E6877F",
   secondaryColor = "#F5C6C2",
   className = "w-36 h-36",
+  emoji,
 }: ProductVisualProps) {
+  if (type === "emoji") {
+    // Placeholder art for catalogue items without an illustration yet.
+    return (
+      <div className={`${className} flex items-center justify-center`}>
+        <div
+          className="flex aspect-square w-[82%] items-center justify-center rounded-[28%] shadow-sm"
+          style={{
+            background: `linear-gradient(145deg, ${secondaryColor} 0%, ${secondaryColor} 45%, ${color}55 100%)`,
+            containerType: "inline-size",
+          }}
+        >
+          <span
+            aria-hidden
+            className="select-none leading-none"
+            style={{ fontSize: "52cqw", filter: "drop-shadow(0 6px 8px rgba(0,0,0,0.15))" }}
+          >
+            {emoji ?? "🛍️"}
+          </span>
+        </div>
+      </div>
+    );
+  }
+
   if (type === "over-ear" || type === "gaming-headset") {
     const isGaming = type === "gaming-headset";
     return (

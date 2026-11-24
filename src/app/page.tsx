@@ -4,10 +4,11 @@ import React from "react";
 import Link from "next/link";
 import {
   TOP_CATEGORIES,
-  HEADPHONES_PRODUCTS,
   WEEKLY_POPULAR_PRODUCTS,
 } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
+import { RecentlyViewed } from "@/components/RecentlyViewed";
+import { dealProducts } from "@/lib/catalog";
 import { ProductVisual } from "@/components/ProductVisual";
 import { HelpCircle, CreditCard, Truck } from "lucide-react";
 
@@ -24,15 +25,15 @@ export default function HomePage() {
               Department Store.
             </h1>
             <p className="max-w-md text-base text-gray-700 leading-relaxed">
-              Shopping is a bit of a relaxing hobby for me, which is sometimes
-              troubling for the bank balance.
+              Electronics, home, fashion, books and travel essentials in one
+              place, with free delivery on orders over ₹999.
             </p>
             <div>
               <Link
-                href="/headphones"
+                href="/deals"
                 className="inline-flex items-center justify-center rounded-full bg-brand-green px-8 py-3.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-brand-greenHover hover:shadow-lg active:scale-95"
               >
-                Learn More
+                Shop Now
               </Link>
             </div>
           </div>
@@ -88,15 +89,23 @@ export default function HomePage() {
         </h2>
         <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
           {TOP_CATEGORIES.map((cat) => (
+            // White card with just the emoji; hovering (or keyboard focus) fades in
+            // the category colour and name. Touch screens can't hover, so there
+            // the colour and name are always shown.
             <Link
               key={cat.id}
-              href="/headphones"
-              className={`group relative flex h-56 flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-b ${cat.bgGradient} p-5 text-white shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl`}
+              href={`/category/${cat.slug}`}
+              aria-label={cat.name}
+              className="group relative flex h-56 flex-col justify-between overflow-hidden rounded-2xl border border-gray-100 bg-white p-5 text-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-transparent hover:shadow-xl focus-visible:-translate-y-1"
             >
-              <h3 className="z-10 text-center text-lg font-bold tracking-tight">
+              <span
+                aria-hidden
+                className={`absolute inset-0 bg-gradient-to-b ${cat.bgGradient} transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100 [@media(hover:hover)]:opacity-0`}
+              />
+              <h3 className="relative text-center text-lg font-bold tracking-tight transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 [@media(hover:hover)]:-translate-y-1 [@media(hover:hover)]:opacity-0">
                 {cat.name}
               </h3>
-              <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-2xl bg-white/15 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
+              <div className="relative mx-auto flex h-28 w-28 items-center justify-center rounded-2xl bg-white/15 transition-transform duration-300 group-hover:scale-110">
                 <span className="text-3xl font-extrabold opacity-90">
                   {cat.name === "Furniture" && "🛋️"}
                   {cat.name === "Hand Bag" && "👜"}
@@ -118,14 +127,17 @@ export default function HomePage() {
             Todays Best Deals For You!
           </h2>
           <Link
-            href="/headphones"
+            href="/deals"
             className="text-sm font-semibold text-brand-green hover:underline"
           >
             View All →
           </Link>
         </div>
         <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {HEADPHONES_PRODUCTS.slice(0, 4).map((product) => (
+          {dealProducts()
+            .sort((a, b) => b.reviews - a.reviews)
+            .slice(0, 4)
+            .map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
@@ -152,27 +164,31 @@ export default function HomePage() {
           {[
             {
               title: "Frequently Asked Questions",
-              subtitle: "Updates on safe Shopping in our Stores",
+              subtitle: "Quick answers on orders, delivery, payments and returns",
+              href: "/faq",
               icon: HelpCircle,
               accent: "bg-amber-100 text-amber-800",
             },
             {
               title: "Online Payment Process",
-              subtitle: "Updates on safe Shopping in our Stores",
+              subtitle: "Pay securely by UPI, card, net banking or cash on delivery",
+              href: "/faq#payments",
               icon: CreditCard,
               accent: "bg-emerald-100 text-brand-green",
             },
             {
               title: "Home Delivery Options",
-              subtitle: "Updates on safe Shopping in our Stores",
+              subtitle: "Standard and express delivery, free over ₹999",
+              href: "/delivery",
               icon: Truck,
               accent: "bg-sky-100 text-sky-800",
             },
           ].map((svc) => {
             const Icon = svc.icon;
             return (
-              <div
+              <Link
                 key={svc.title}
+                href={svc.href}
                 className="group flex flex-col justify-between overflow-hidden rounded-2xl bg-brand-surface transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               >
                 <div className="p-7">
@@ -190,11 +206,15 @@ export default function HomePage() {
                     <Icon className="h-10 w-10" />
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
       </section>
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <RecentlyViewed title="Pick Up Where You Left Off" />
+      </div>
     </div>
   );
 }

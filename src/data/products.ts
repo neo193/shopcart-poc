@@ -1,3 +1,5 @@
+import { MORE_PRODUCTS } from "./moreProducts";
+
 export interface ColorVariant {
   name: string;
   hex: string;
@@ -15,6 +17,10 @@ export interface Product {
   shortDesc: string;
   rating: number;
   reviews: number;
+  /** ISO date the product was listed; drives "What's New". */
+  addedAt: string;
+  /** Used when visualType is "emoji" (placeholder art until real photos). */
+  emoji?: string;
   category: string;
   headphoneType?: "Over-Ear" | "In-Ear" | "On-Ear";
   material?: string;
@@ -27,7 +33,8 @@ export interface Product {
     | "gaming-headset"
     | "laptop"
     | "smart-speaker"
-    | "laptop-sleeve";
+    | "laptop-sleeve"
+    | "emoji";
   defaultColor: string;
   colors: ColorVariant[];
   specs: {
@@ -174,12 +181,13 @@ export const HEADPHONES_PRODUCTS: Product[] = [
     slug: "wireless-earbuds-ipx8",
     name: "Wireless Earbuds, IPX8",
     brand: "SoundCore",
-    price: 89.0,
+    price: 2999,
     shortDesc: "Organic Cotton, fairtrade certified",
     description:
       "Waterproof IPX8 wireless earbuds engineered with deep bass drivers, 32-hour charging case, and crystal-clear call microphones.",
-    rating: 5,
-    reviews: 121,
+    rating: 4.6,
+    reviews: 1284,
+    addedAt: "2026-10-02",
     category: "Headphones",
     headphoneType: "In-Ear",
     material: "Matte Polymer",
@@ -195,7 +203,7 @@ export const HEADPHONES_PRODUCTS: Product[] = [
       general: {
         Brand: "SoundCore",
         Model: "IPX8 True Wireless Earbuds",
-        Price: "$89.00",
+        Price: "₹2,999",
         "Release Date": "January 2024",
         "Model Number": "SC-IPX8-BLK",
         "Headphone Type": "In-Ear",
@@ -217,13 +225,14 @@ export const HEADPHONES_PRODUCTS: Product[] = [
     slug: "airpods-max",
     name: "Airpods- Max",
     brand: "Apple",
-    price: 549.0,
-    monthlyPrice: 99.99,
+    price: 59900,
+    monthlyPrice: 9984,
     shortDesc: "A perfect balance of high-fidelity audio",
     description:
       "A perfect balance of exhilarating high-fidelity audio and the effortless magic of AirPods.",
-    rating: 5,
-    reviews: 121,
+    rating: 4.8,
+    reviews: 3920,
+    addedAt: "2026-03-14",
     category: "Headphones",
     headphoneType: "Over-Ear",
     material: "Anodized Aluminum",
@@ -236,7 +245,7 @@ export const HEADPHONES_PRODUCTS: Product[] = [
       general: {
         Brand: "Apple",
         Model: "AirPods Max Wireless Headphones",
-        Price: "$549.00",
+        Price: "₹59,900",
         "Release Date": "December 2020",
         "Model Number": "AirPods Max",
         "Headphone Type": "Over-Ear",
@@ -258,12 +267,13 @@ export const HEADPHONES_PRODUCTS: Product[] = [
     slug: "bose-bt-earphones",
     name: "Bose BT Earphones",
     brand: "Bose",
-    price: 289.0,
+    price: 24900,
     shortDesc: "Table with air purifier, stained veneer/black",
     description:
       "Signature Bose active noise cancellation with plush memory-foam ear cushions and multi-device Bluetooth pairing.",
-    rating: 5,
-    reviews: 121,
+    rating: 4.7,
+    reviews: 2110,
+    addedAt: "2026-06-20",
     category: "Headphones",
     headphoneType: "Over-Ear",
     material: "Protein Leather",
@@ -279,7 +289,7 @@ export const HEADPHONES_PRODUCTS: Product[] = [
       general: {
         Brand: "Bose",
         Model: "Bose QuietComfort BT",
-        Price: "$289.00",
+        Price: "₹24,900",
         "Release Date": "March 2024",
         "Model Number": "QC-BT-289",
         "Headphone Type": "Over-Ear",
@@ -301,12 +311,13 @@ export const HEADPHONES_PRODUCTS: Product[] = [
     slug: "vivefox-headphones",
     name: "VIVEFOX Headphones",
     brand: "VIVEFOX",
-    price: 39.0,
+    price: 1499,
     shortDesc: "Wired Stereo Headsets With Mic",
     description:
       "Lightweight foldable stereo headphones with inline HD microphone and tangle-free braided 3.5mm audio cable.",
-    rating: 5,
-    reviews: 121,
+    rating: 4.1,
+    reviews: 312,
+    addedAt: "2026-09-11",
     category: "Headphones",
     headphoneType: "On-Ear",
     material: "ABS Plastic",
@@ -322,7 +333,7 @@ export const HEADPHONES_PRODUCTS: Product[] = [
       general: {
         Brand: "VIVEFOX",
         Model: "VIVEFOX Wired Stereo",
-        Price: "$39.00",
+        Price: "₹1,499",
         "Release Date": "June 2023",
         "Model Number": "VF-ST-01",
         "Headphone Type": "On-Ear",
@@ -344,12 +355,13 @@ export const HEADPHONES_PRODUCTS: Product[] = [
     slug: "jbl-tune-600btnc",
     name: "JBL TUNE 600BTNC",
     brand: "JBL",
-    price: 59.0,
+    price: 4999,
     shortDesc: "Premium Bone Conduction Open Ear Bluetooth",
     description:
       "JBL Pure Bass Sound with Active Noise Cancellation in a compact, flat-folding on-ear silhouette.",
-    rating: 5,
-    reviews: 121,
+    rating: 4.5,
+    reviews: 1870,
+    addedAt: "2026-04-02",
     category: "Headphones",
     headphoneType: "On-Ear",
     material: "Matte Polymer",
@@ -365,7 +377,7 @@ export const HEADPHONES_PRODUCTS: Product[] = [
       general: {
         Brand: "JBL",
         Model: "TUNE 600BTNC",
-        Price: "$59.00",
+        Price: "₹4,999",
         "Release Date": "September 2023",
         "Model Number": "JBLT600BTNC",
         "Headphone Type": "On-Ear",
@@ -387,12 +399,13 @@ export const HEADPHONES_PRODUCTS: Product[] = [
     slug: "trury-bluetooth",
     name: "TRURY Bluetooth",
     brand: "TRURY",
-    price: 169.0,
+    price: 3499,
     shortDesc: "USB-C to USB-C 3.2, 5ft",
     description:
       "Transparent cyber-chassis wireless earbuds with low-latency gaming mode and RGB battery indicator.",
-    rating: 5,
-    reviews: 121,
+    rating: 3.9,
+    reviews: 204,
+    addedAt: "2026-11-10",
     category: "Headphones",
     headphoneType: "In-Ear",
     material: "Polycarbonate",
@@ -407,7 +420,7 @@ export const HEADPHONES_PRODUCTS: Product[] = [
       general: {
         Brand: "TRURY",
         Model: "TRURY Cyber TWS",
-        Price: "$169.00",
+        Price: "₹3,499",
         "Release Date": "February 2024",
         "Model Number": "TR-CYB-169",
         "Headphone Type": "In-Ear",
@@ -429,12 +442,13 @@ export const HEADPHONES_PRODUCTS: Product[] = [
     slug: "monster-mnflex",
     name: "Monster MNFLEX",
     brand: "Monster",
-    price: 199.0,
+    price: 5999,
     shortDesc: "Flex Active Noise Cancelling Bluetooth",
     description:
       "Flexible ergonomic neckband earphones built for athletes with magnetic earbuds and rapid 10-minute charge.",
-    rating: 5,
-    reviews: 121,
+    rating: 4.3,
+    reviews: 688,
+    addedAt: "2026-07-18",
     category: "Headphones",
     headphoneType: "In-Ear",
     material: "Silicone & Alloy",
@@ -449,7 +463,7 @@ export const HEADPHONES_PRODUCTS: Product[] = [
       general: {
         Brand: "Monster",
         Model: "MNFLEX ANC",
-        Price: "$199.00",
+        Price: "₹5,999",
         "Release Date": "November 2023",
         "Model Number": "MN-FLX-199",
         "Headphone Type": "In-Ear",
@@ -471,12 +485,13 @@ export const HEADPHONES_PRODUCTS: Product[] = [
     slug: "mpow-ch6",
     name: "Mpow CH6",
     brand: "Mpow",
-    price: 569.0,
+    price: 2499,
     shortDesc: "Kids Headphones",
     description:
       "Studio-grade acoustic isolation headphones in vibrant sky blue with ultra-soft memory-protein earpads.",
-    rating: 5,
-    reviews: 121,
+    rating: 4.4,
+    reviews: 951,
+    addedAt: "2026-02-27",
     category: "Headphones",
     headphoneType: "Over-Ear",
     material: "Soft-Touch Matte",
@@ -492,7 +507,7 @@ export const HEADPHONES_PRODUCTS: Product[] = [
       general: {
         Brand: "Mpow",
         Model: "Mpow CH6 Studio",
-        Price: "$569.00",
+        Price: "₹2,499",
         "Release Date": "April 2024",
         "Model Number": "MP-CH6",
         "Headphone Type": "Over-Ear",
@@ -514,12 +529,13 @@ export const HEADPHONES_PRODUCTS: Product[] = [
     slug: "taotronics-earbuds",
     name: "TaoTronics Earbuds",
     brand: "TaoTronics",
-    price: 59.0,
+    price: 2999,
     shortDesc: "Organic Cotton, fairtrade certified",
     description:
       "Compact stem-style wireless earbuds with single-step pairing and balanced acoustic tuning.",
-    rating: 5,
-    reviews: 121,
+    rating: 4.2,
+    reviews: 1433,
+    addedAt: "2026-08-05",
     category: "Headphones",
     headphoneType: "In-Ear",
     material: "Matte Polymer",
@@ -532,7 +548,7 @@ export const HEADPHONES_PRODUCTS: Product[] = [
       general: {
         Brand: "TaoTronics",
         Model: "SoundLiberty 79",
-        Price: "$59.00",
+        Price: "₹2,999",
         "Release Date": "August 2023",
         "Model Number": "TT-BH079",
         "Headphone Type": "In-Ear",
@@ -554,12 +570,13 @@ export const HEADPHONES_PRODUCTS: Product[] = [
     slug: "soundpeats-aptx",
     name: "SoundPEATS APTX",
     brand: "SoundPEATS",
-    price: 169.0,
+    price: 3999,
     shortDesc: "IPX8 Water Cancelling Bluetooth Headphones",
     description:
       "Qualcomm aptX Adaptive wireless earbuds inside a brushed gunmetal charging case.",
-    rating: 5,
-    reviews: 121,
+    rating: 4.6,
+    reviews: 742,
+    addedAt: "2026-05-29",
     category: "Headphones",
     headphoneType: "In-Ear",
     material: "Brushed Aluminum",
@@ -572,7 +589,7 @@ export const HEADPHONES_PRODUCTS: Product[] = [
       general: {
         Brand: "SoundPEATS",
         Model: "Sonic Pro aptX",
-        Price: "$169.00",
+        Price: "₹3,999",
         "Release Date": "January 2024",
         "Model Number": "SP-APTX-169",
         "Headphone Type": "In-Ear",
@@ -594,12 +611,13 @@ export const HEADPHONES_PRODUCTS: Product[] = [
     slug: "beats-solo3",
     name: "Beats Solo3",
     brand: "Beats",
-    price: 199.0,
+    price: 15900,
     shortDesc: "Beats Solo3 Wireless Headphones - Rose Gold",
     description:
       "Apple W1 chip powered wireless on-ear headphones with up to 40 hours of battery life and Fast Fuel charging.",
-    rating: 5,
-    reviews: 121,
+    rating: 4.7,
+    reviews: 5120,
+    addedAt: "2026-01-15",
     category: "Headphones",
     headphoneType: "On-Ear",
     material: "Brushed Alloy",
@@ -615,7 +633,7 @@ export const HEADPHONES_PRODUCTS: Product[] = [
       general: {
         Brand: "Beats",
         Model: "Beats Solo3 Wireless",
-        Price: "$199.00",
+        Price: "₹15,900",
         "Release Date": "May 2023",
         "Model Number": "MX442LL/A",
         "Headphone Type": "On-Ear",
@@ -637,12 +655,13 @@ export const HEADPHONES_PRODUCTS: Product[] = [
     slug: "joly-comb-bluetooth",
     name: "Joly Comb Bluetooth",
     brand: "Joly Comb",
-    price: 569.0,
+    price: 1999,
     shortDesc: "Headphones with RGB Light Earcup",
     description:
       "Dual-mode wireless studio headphones with subtle ambient earcup illumination and ultra-low latency.",
-    rating: 5,
-    reviews: 121,
+    rating: 4.0,
+    reviews: 389,
+    addedAt: "2026-11-02",
     category: "Headphones",
     headphoneType: "Over-Ear",
     material: "Protein Leather",
@@ -655,7 +674,7 @@ export const HEADPHONES_PRODUCTS: Product[] = [
       general: {
         Brand: "Joly Comb",
         Model: "JC Pro RGB",
-        Price: "$569.00",
+        Price: "₹1,999",
         "Release Date": "July 2024",
         "Model Number": "JC-RGB-569",
         "Headphone Type": "Over-Ear",
@@ -680,12 +699,13 @@ export const WEEKLY_POPULAR_PRODUCTS: Product[] = [
     slug: "gaming-headphone",
     name: "Gaming Headphone",
     brand: "Razer",
-    price: 239.0,
+    price: 12999,
     shortDesc: "Table with air purifier, stained veneer/black",
     description:
       "7.1 surround sound gaming headset with breathable cooling-gel ear cushions and detachable cardioid mic.",
-    rating: 5,
-    reviews: 121,
+    rating: 4.5,
+    reviews: 2675,
+    addedAt: "2026-10-21",
     category: "Tech",
     headphoneType: "Over-Ear",
     visualType: "gaming-headset",
@@ -697,7 +717,7 @@ export const WEEKLY_POPULAR_PRODUCTS: Product[] = [
       general: {
         Brand: "Razer",
         Model: "Kraken Pro Wireless",
-        Price: "$239.00",
+        Price: "₹12,999",
         "Release Date": "March 2024",
         "Model Number": "RZ-KP-239",
         "Headphone Type": "Over-Ear",
@@ -719,12 +739,13 @@ export const WEEKLY_POPULAR_PRODUCTS: Product[] = [
     slug: "macbook-pro-13",
     name: 'Macbook pro 13"',
     brand: "Apple",
-    price: 1099.0,
+    price: 99900,
     shortDesc: "256, 8 core GPU, 8 GB",
     description:
       "Sleek 13-inch Retina laptop powered by next-gen silicon, all-day battery life, and studio-quality mics.",
-    rating: 5,
-    reviews: 121,
+    rating: 4.9,
+    reviews: 6410,
+    addedAt: "2026-03-30",
     category: "Tech",
     visualType: "laptop",
     defaultColor: "#CBD5E1",
@@ -733,7 +754,7 @@ export const WEEKLY_POPULAR_PRODUCTS: Product[] = [
       general: {
         Brand: "Apple",
         Model: 'MacBook Pro 13"',
-        Price: "$1,099.00",
+        Price: "₹99,900",
         "Release Date": "June 2023",
         "Model Number": "MNEH3LL/A",
         Category: "Laptop",
@@ -754,12 +775,13 @@ export const WEEKLY_POPULAR_PRODUCTS: Product[] = [
     slug: "homepod-mini",
     name: "HomePod mini",
     brand: "Apple",
-    price: 59.0,
+    price: 9900,
     shortDesc: "5 Colors Available",
     description:
       "Room-filling 360-degree computational audio in a compact woven-mesh smart speaker.",
-    rating: 5,
-    reviews: 121,
+    rating: 4.8,
+    reviews: 8230,
+    addedAt: "2026-09-25",
     category: "Tech",
     visualType: "smart-speaker",
     defaultColor: "#F97316",
@@ -772,7 +794,7 @@ export const WEEKLY_POPULAR_PRODUCTS: Product[] = [
       general: {
         Brand: "Apple",
         Model: "HomePod mini",
-        Price: "$59.00",
+        Price: "₹9,900",
         "Release Date": "November 2021",
         "Model Number": "MJ2D3LL/A",
         Category: "Smart Speaker",
@@ -791,12 +813,13 @@ export const WEEKLY_POPULAR_PRODUCTS: Product[] = [
     slug: "laptop-sleeve-macbook",
     name: "Laptop sleeve MacBook",
     brand: "Native Union",
-    price: 59.0,
+    price: 1499,
     shortDesc: "Organic Cotton, fairtrade certified",
     description:
       "Minimalist quilted sleeve crafted from organic cotton canvas with soft microfiber lining and magnetic closure.",
-    rating: 5,
-    reviews: 121,
+    rating: 4.4,
+    reviews: 1120,
+    addedAt: "2026-06-08",
     category: "Tech",
     visualType: "laptop-sleeve",
     defaultColor: "#D4A373",
@@ -805,7 +828,7 @@ export const WEEKLY_POPULAR_PRODUCTS: Product[] = [
       general: {
         Brand: "Native Union",
         Model: "Stow Sleeve 13-14",
-        Price: "$59.00",
+        Price: "₹1,499",
         "Release Date": "April 2024",
         "Model Number": "NU-SLV-59",
         Category: "Accessories",
@@ -824,6 +847,7 @@ export const WEEKLY_POPULAR_PRODUCTS: Product[] = [
 export const ALL_PRODUCTS: Product[] = [
   ...HEADPHONES_PRODUCTS,
   ...WEEKLY_POPULAR_PRODUCTS,
+  ...MORE_PRODUCTS,
 ];
 
 export function getProductBySlug(slug: string): Product | undefined {
