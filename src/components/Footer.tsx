@@ -86,7 +86,7 @@ export function Footer() {
 
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-gray-100 pt-6 text-xs text-gray-500 sm:flex-row">
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-            <Link href="/contact" className="hover:text-brand-green">Become a Seller</Link>
+            <Link href="/contact" className="hover:text-brand-green">Contact us</Link>
             <Link href="/faq" className="hover:text-brand-green">Help Center</Link>
             <Link href="/terms" className="hover:text-brand-green">Terms of Service</Link>
             <Link href="/privacy" className="hover:text-brand-green">Privacy Policy</Link>
